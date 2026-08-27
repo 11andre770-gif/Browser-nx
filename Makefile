@@ -25,7 +25,7 @@ APP_VERSION := 0.1.0
 #---------------------------------------------------------------------------------
 # Code generation
 #---------------------------------------------------------------------------------
-ARCH := -march=armv8-a+crc+crypto -mtune=cortex-a57 -fPIE
+ARCH := -march=armv8-a+crc+crypto -fPIE
 
 CFLAGS := -g -Wall -O2 -ffunction-sections \
            $(ARCH) $(DEFINES)
