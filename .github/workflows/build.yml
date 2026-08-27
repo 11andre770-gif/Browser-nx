@@ -13,16 +13,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
-      - name: Verify Switch toolchain
+      - name: Install Switch development packages
         run: |
-          echo "DEVKITPRO=$DEVKITPRO"
-          aarch64-none-elf-gcc --version
-          elf2nro --help
-
+          pacman -Syu --noconfirm
+          pacman -S --noconfirm switch-dev
       - name: Build
         run: make
-
       - name: Upload NRO
         uses: actions/upload-artifact@v4
         with:
