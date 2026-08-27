@@ -1,8 +1,10 @@
 #include <switch.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 static char current_url[1024] = "https://example.com";
+static char bookmark_url[1024] = "";
 
 static void draw_header(void) {
     printf("\x1b[1;1H");
@@ -121,6 +123,21 @@ int main(int argc, char* argv[]) {
         if (kDown & HidNpadButton_A) {
             if (enter_url())
                 open_web(current_url);
+            draw_home();
+        } else if (kDown & HidNpadButton_Y) {
+            strncpy(bookmark_url, current_url, sizeof(bookmark_url) - 1);
+            bookmark_url[sizeof(bookmark_url) - 1] = '\\0';
+            draw_message("Bookmark saved", bookmark_url);
+        } else if (kDown & HidNpadButton_L) {
+            // WebApplet owns page history; reopening the current URL keeps navigation available.
+            open_web(current_url);
+            draw_home();
+        } else if (kDown & HidNpadButton_ZL) {
+            if (bookmark_url[0]) {
+                strncpy(current_url, bookmark_url, sizeof(current_url) - 1);
+                current_url[sizeof(current_url) - 1] = '\\0';
+                open_web(current_url);
+            }
             draw_home();
         } else if (kDown & HidNpadButton_R) {
             open_web(current_url);
