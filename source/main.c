@@ -126,7 +126,7 @@ int main(int argc, char* argv[]) {
             draw_home();
         } else if (kDown & HidNpadButton_Y) {
             strncpy(bookmark_url, current_url, sizeof(bookmark_url) - 1);
-            bookmark_url[sizeof(bookmark_url) - 1] = '\\0';
+            bookmark_url[sizeof(bookmark_url) - 1] = '\0';
             draw_message("Bookmark saved", bookmark_url);
         } else if (kDown & HidNpadButton_L) {
             // WebApplet owns page history; reopening the current URL keeps navigation available.
@@ -135,7 +135,7 @@ int main(int argc, char* argv[]) {
         } else if (kDown & HidNpadButton_ZL) {
             if (bookmark_url[0]) {
                 strncpy(current_url, bookmark_url, sizeof(current_url) - 1);
-                current_url[sizeof(current_url) - 1] = '\\0';
+                current_url[sizeof(current_url) - 1] = '\0';
                 open_web(current_url);
             }
             draw_home();
