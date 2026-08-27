@@ -29,6 +29,9 @@ LDFLAGS := -g
 LIBS := -lnx
 LIBDIRS := $(PORTLIBS) $(LIBNX)
 
+# switch_rules expects the linker to be the C++ driver when linking libnx.
+export LD := $(CXX)
+
 ifneq ($(BUILD),$(notdir $(CURDIR)))
 export OUTPUT := $(CURDIR)/$(TARGET)
 export TOPDIR := $(CURDIR)
