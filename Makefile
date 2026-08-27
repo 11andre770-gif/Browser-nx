@@ -41,7 +41,7 @@ BINFILES := $(foreach dir,$(DATA),$(notdir $(wildcard $(dir)/*.*)))
 export OFILES_BIN := $(addsuffix .o,$(BINFILES))
 export OFILES_SRC := $(CPPFILES:.cpp=.o) $(CFILES:.c=.o) $(SFILES:.s=.o)
 export OFILES := $(OFILES_BIN) $(OFILES_SRC)
-export INCLUDE := $(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) -I. -iquote $(CURDIR)/include/switch/
+export INCLUDE := $(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) -I$(DEVKITPRO)/libnx/include -I. -iquote $(CURDIR)/include/switch/
 export LIBPATHS := $(foreach dir,$(LIBDIRS),-L$(dir)/lib)
 
 .PHONY: all clean
