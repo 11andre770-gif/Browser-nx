@@ -4,23 +4,38 @@ on:
   push:
     branches: [ main ]
   pull_request:
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: devkitpro/devkita64
+      image: devkitpro/devkita64:latest
 
     steps:
-      - uses: actions/checkout@v4
-      - name: Install Switch development packages
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify Switch toolchain
         run: |
-          pacman -Syu --noconfirm
-          pacman -S --noconfirm switch-dev
+          echo "DEVKITPRO=$DEVKITPRO"
+          echo "DEVKITA64=$DEVKITA64"
+          command -v aarch64-none-elf-gcc
+          command -v nacptool
+          command -v elf2nro
+
       - name: Build
-        run: make
+        run: make -j2
+
+      - name: Verify NRO
+        run: |
+          test -s NXBrowser.nro
+          file NXBrowser.nro || true
+          ls -lh NXBrowser.nro
+
       - name: Upload NRO
         uses: actions/upload-artifact@v4
         with:
           name: NXBrowser-nro
           path: NXBrowser.nro
+          if-no-files-found: error
