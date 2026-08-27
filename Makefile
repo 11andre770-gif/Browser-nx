@@ -33,7 +33,7 @@ CFLAGS += $(INCLUDE) -D__SWITCH__
 
 CXXFLAGS := $(CFLAGS) -fno-rtti -fno-exceptions
 ASFLAGS := -g $(ARCH)
-LDFLAGS := -g -Wl,-Map,$(notdir $*.map)
+LDFLAGS := -g
 LIBS := -lnx
 
 #---------------------------------------------------------------------------------
