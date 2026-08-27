@@ -9,7 +9,8 @@ static void draw_header(void) {
     printf("================================================\n");
     printf("                 NX BROWSER 0.3                 \n");
     printf("================================================\n");
-    printf("  [A] Address    [X] Home    [Y] Bookmark       \n");
+    printf("  [A] Open URL   [X] Home    [Y] Bookmark       \n");
+    printf("  [L] Back      [Z] Forward [R] Reload         \n");
     printf("  [B] Back       [R] Reload  [PLUS] Exit        \n");
     printf("------------------------------------------------\n");
 }
