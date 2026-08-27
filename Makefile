@@ -1,5 +1,4 @@
 TARGET := NXBrowser
-BUILD := build
 SOURCES := source
 INCLUDES := include
 
@@ -15,20 +14,16 @@ OBJS := $(CFILES:.c=.o) $(CPPFILES:.cpp=.o)
 all: $(TARGET).nro
 
 $(TARGET).elf: $(OBJS)
-	@echo " LINK  $@"
 	$(CXX) $(LDFLAGS) $(OBJS) -lnx -o $@
 
 %.o: %.c
-	@echo " CC    $<"
 	$(CC) $(CFLAGS) -c $< -o $@
 
 %.o: %.cpp
-	@echo " CXX   $<"
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 $(TARGET).nro: $(TARGET).elf
-	@echo " NRO   $@"
-	elf2nro $< $@ --icon=icon.jpg --nacp=app.nacp
+	elf2nro $< $@ --nacp=app.nacp
 
 clean:
 	rm -f $(OBJS) $(TARGET).elf $(TARGET).nro

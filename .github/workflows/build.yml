@@ -8,14 +8,17 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: devkitpro/devkita64
+    container:
+      image: devkitpro/devkita64
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Switch development packages
+      - name: Verify Switch toolchain
         run: |
-          pacman -Sy --noconfirm switch-dev
+          echo "DEVKITPRO=$DEVKITPRO"
+          aarch64-none-elf-gcc --version
+          elf2nro --help
 
       - name: Build
         run: make
