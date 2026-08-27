@@ -16,21 +16,32 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Configure devkitPro environment
+        run: |
+          export DEVKITPRO=/opt/devkitpro
+          export DEVKITA64=$DEVKITPRO/devkitA64
+          export PATH=$DEVKITA64/bin:$DEVKITPRO/tools/bin:$PATH
+          echo "DEVKITPRO=$DEVKITPRO" >> "$GITHUB_ENV"
+          echo "DEVKITA64=$DEVKITA64" >> "$GITHUB_ENV"
+          echo "$DEVKITA64/bin" >> "$GITHUB_PATH"
+          echo "$DEVKITPRO/tools/bin" >> "$GITHUB_PATH"
+
       - name: Verify Switch toolchain
         run: |
-          echo "DEVKITPRO=$DEVKITPRO"
-          echo "DEVKITA64=$DEVKITA64"
+          set -eux
+          test -d "$DEVKITA64"
           command -v aarch64-none-elf-gcc
           command -v nacptool
           command -v elf2nro
+          test -f "$DEVKITPRO/libnx/switch_rules"
 
       - name: Build
         run: make -j2
 
       - name: Verify NRO
         run: |
+          set -eux
           test -s NXBrowser.nro
-          file NXBrowser.nro || true
           ls -lh NXBrowser.nro
 
       - name: Upload NRO
