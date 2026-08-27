@@ -25,7 +25,7 @@ CFLAGS := -g -Wall -O2 -ffunction-sections $(ARCH) $(DEFINES)
 CFLAGS += $(INCLUDE) -D__SWITCH__
 CXXFLAGS := $(CFLAGS) -fno-rtti -fno-exceptions
 ASFLAGS := -g $(ARCH)
-LDFLAGS := -specs=$(DEVKITPRO)/libnx/switch.specs -g $(ARCH)
+LDFLAGS := -specs=$(DEVKITPRO)/libnx/switch.specs -g
 LIBS := -lnx
 LIBDIRS := $(PORTLIBS) $(LIBNX)
 
