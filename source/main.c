@@ -17,7 +17,7 @@ static void draw_header(void) {
     printf("------------------------------------------------\n");
 }
 
-static void draw_home(void) {
+static void draw_message(const char *title, const char *message) {\n    consoleClear();\n    draw_header();\n    printf("\\n  %s\\n\\n  %s\\n\\n", title, message);\n    printf("  Press B to return.\\n");\n}\n\nstatic void draw_home(void) {
     consoleClear();
     draw_header();
     printf("\n  Home\n\n");
